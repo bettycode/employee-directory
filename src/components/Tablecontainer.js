@@ -11,7 +11,7 @@ import API from "../components/API";
      const [input,setInput]= useState("")
     // console.log(employees)
   
-
+// api
 useEffect(() => {
     API.search() 
     .then(res =>{
@@ -23,7 +23,7 @@ useEffect(() => {
     
 
   }, [])
- 
+  // filtering by input
   const handleSearchInput =(event) =>{
     // setInput(event.target.value);
     const { value } = event.target;
@@ -39,7 +39,28 @@ useEffect(() => {
     event.preventDefault();
       console.log("clicked")
   }
+  //sorting by name
+  const sort =(e)=>{
+    console.log("clicked")
+    const newEmployee = oldEmployee.sort((a, b) => {
+      let fa = a.name.first.toLowerCase(),
+          fb = b.name.first.toLowerCase();
   
+      if (fa < fb) {
+          return -1;
+      }
+      if (fa > fb) {
+          return 1;
+      }
+      return 0;
+  });
+    console.log(oldEmployee)
+    setEmployees(newEmployee)
+    console.log(oldEmployee)
+
+
+  }
+
     return (
         <div>
             <Header 
@@ -57,7 +78,7 @@ useEffect(() => {
             email={employees.email}
             phone={employees.phone}
             dob={employees.location}
-            
+            sort = {sort}
             />
             </div>
         </div>
